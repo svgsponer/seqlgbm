@@ -1,11 +1,19 @@
 # SEQLGBM and SFSEQL
-Repository for SEQuence Learner Gradient Boosting Machine and Static Feature SEQuence Learner
+Repository for SEQuence Learner Gradient Boosting Machine and Static Feature SEQuence Learner.
+This repository contains code for reproducing the experiments explained in the paper:
+Accurate Sequence Classification by Gradient Boosting with Linear Models by Severin Gsponer, Thach Le Nguyen, and Georgiana Ifrim.
 
-Content will follow soon.
 
-## Install
+## Install SEQLGBM
+### Obtain the code
 First clone the repository:
 `git clone https://github.com/svgsponer/SEQL.git`
+
+The repository consists of three parts projected to the three folders
+- seql: `SEQLGBM` source code
+- Protsol: Data and scripts related to the Protein solubility experiments
+- UCR: Some data and scripts related to the Time Series Classification task.
+
 
 ### Requirements
 SEQL has various requirements:
@@ -14,7 +22,7 @@ SEQL has various requirements:
 - Armadillo
 - JSON for Modern C++
 - Catch2 (only if tests are build)
-Furtherdown we provide a rough guidline how to install these requirments.
+Furtherdown we provide a rough guidline how to install these requirements.
    
 To install SEQLGBM itself run these steps:
 ```
@@ -25,10 +33,9 @@ cmake ..
 cmake -build .
 ```
 This should produce the `seqlr` within the bin `build/bin` directory.
+Either call it with the full path or add it to your `$PATH`.
 For further configuration it's best to use `ccmake`, which provides a
 interface to tune the compilation options.
-
-
 
 
 ## Run
@@ -135,7 +142,7 @@ make install
 
 ## JSON for Modern C++
 A json library for C++.
-Get the source from https://github.com/nlohmann/json.git, compile and install.
+Get the source from https://github.com/nlohmann/json, compile and install.
 ```
 mkdir json
 cd json
@@ -151,7 +158,7 @@ make install
 ## Catch2
 Catch2 is a testing library for C++.
 Hence Catch2 is only needed when you intend to run the unit tests.
-To enable test run ~cmake~ with  the option ~-DBUILD_TESTING=ON~.
+To enable test run `cmake` with  the option `-DBUILD_TESTING=ON`.
 
 ```
 mkdir catch2
