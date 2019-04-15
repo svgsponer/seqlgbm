@@ -6,18 +6,17 @@ This repository contains code for reproducing the experiments explained in the p
 
 
 ## Install SEQLGBM
-### Obtain the code
 First clone the repository:
 `git clone https://github.com/svgsponer/SEQL.git`
 
-The repository consists of three parts projected to the three folders
-- seql: `SEQLGBM` source code
+The repository consists of three main folders:
+- seql: `SEQLGBM` source code 
 - Protsol: Data and scripts related to the protein solubility experiment
 - UCR: Some data and scripts related to the time series classification task
 
 
 ### Requirements
-SEQL has various requirements:
+SEQLGBM has various requirements:
 - C++17 compiler (e.g., >=gcc-7 or >=clang-7)
 - CMake (version >= 3.8)
 - Armadillo
@@ -34,7 +33,7 @@ cmake ..
 cmake -build .
 ```
 This should produce the `seqlr` within the bin `build/bin` directory.
-Either call it with the full path or add it to your `$PATH`.
+You can either call it with the full path or add it to your `$PATH` envioment variable.
 For further configuration it's best to use `ccmake`, which provides a
 interface to tune the compilation options.
 

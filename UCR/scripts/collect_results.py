@@ -52,14 +52,9 @@ def collect_results_SEQL(bp):
 
 @click.command()
 @click.option("-b", "--base_df")
-@click.option("-s", "--sfseql", type=click.Path(exists=True))
-@click.option("-g", "--glmnet", type=click.Path(exists=True))
-@click.option("-a", "--saxseql", type=click.Path(exists=True))
-@click.option("-q", "--sfseqlgbm", type=click.Path(exists=True))
-@click.option("-l", "--seqlgbm", type=click.Path(exists=True))
-@click.option("-o", "--output", type=click.Path(file_okay=True, writable=True),
-              required=True)
-def cli(base_df, output, sfseql, glmnet, saxseql, sfseqlgbm, seqlgbm):
+@click.option("-o", "--output", type=click.Path(file_okay=True, writable=True), required=True)
+@click.option('--item', nargs=2, type=click.Tuple([str,str]), multiple=True, required=True)
+def cli(base_df, output,item): 
     if not base_df is None:
         print('Base dataframe to use: %s' % base_df)
         df = pd.read_csv(Path(base_df).expanduser().resolve())
@@ -67,65 +62,17 @@ def cli(base_df, output, sfseql, glmnet, saxseql, sfseqlgbm, seqlgbm):
     else:
         df = pd.DataFrame()
 
-    if not sfseql is None:
-        print('Collecting results of SFSEQL in: %s' % sfseql)
-        p = Path(sfseql).resolve()
+    for p, n in item:
+        print('Collecting results for %s in: %s' % (n, p))
+        p = Path(p).resolve()
         ret = collect_results_SEQL(p)
-        sfseql_df = pd.DataFrame(ret, columns=['Dataset', 'SFSEQL'])
-        sfseql_df = sfseql_df.set_index('Dataset')
-        print("Found %s entries for SFSEQL" % sfseql_df.shape[0])
+        n_df = pd.DataFrame(ret, columns=['Dataset', n])
+        n_df = n_df.set_index('Dataset')
+        print("Found %s entries for %s" % (n_df.shape[0], n))
         if df.empty:
-            df = sfseql_df.join(df, how='outer')
+            df = n_df.join(df, how='outer')
         else:
-            df = sfseql_df.join(df, how='inner')
-
-    if not sfseqlgbm is None:
-        print('Collecting results of SFSEQLGBM in: %s' % sfseqlgbm)
-        p = Path(sfseqlgbm).resolve()
-        ret = collect_results_SEQL(p)
-        sfseqlgbm_df = pd.DataFrame(ret, columns=['Dataset', 'SFSEQLGBM'])
-        sfseqlgbm_df = sfseqlgbm_df.set_index('Dataset')
-        print("Found %s entries for SFSEQLGBM" % sfseqlgbm_df.shape[0])
-        if df.empty:
-            df = sfseqlgbm_df.join(df, how='outer')
-        else:
-            df = sfseqlgbm_df.join(df, how='inner')
-
-    if not seqlgbm is None:
-        print('Collecting results of SEQLGBM in: %s' % seqlgbm)
-        p = Path(seqlgbm).resolve()
-        ret = collect_results_SEQL(p)
-        sfseqlgbm_df = pd.DataFrame(ret, columns=['Dataset', 'SAX.SEQLGBM'])
-        sfseqlgbm_df = sfseqlgbm_df.set_index('Dataset')
-        print("Found %s entries for SAX.SEQLGBM" % sfseqlgbm_df.shape[0])
-        if df.empty:
-            df = sfseqlgbm_df.join(df, how='outer')
-        else:
-            df = sfseqlgbm_df.join(df, how='inner')
-
-    if not glmnet is None:
-        print('Collecting results of glment in: %s' % glmnet)
-        p = Path(glmnet).resolve()
-        glm = collect_results_glmnet(p)
-        glm_df = pd.DataFrame(glm, columns=['Dataset', 'SFglmnet'])
-        glm_df = glm_df.set_index('Dataset')
-        print("Found %s entries for GLMNET" % glm_df.shape[0])
-        if df.empty:
-            df = glm_df.join(df, how='outer')
-        else:
-            df = glm_df.join(df, how='inner')
-
-    if not saxseql is None:
-        print('Collecting results of saxseql in: %s' % saxseql)
-        p = Path(saxseql).resolve()
-        ret = collect_results_SEQL(p)
-        saxseql_df = pd.DataFrame(ret, columns=['Dataset', 'MSAXSEQL'])
-        saxseql_df = saxseql_df.set_index('Dataset')
-        print("Found %s entries for SAXSEQL" % saxseql_df.shape[0])
-        if df.empty:
-            df = saxseql_df.join(df, how='outer')
-        else:
-            df = saxseql_df.join(df, how='inner')
+            df = n_df.join(df, how='inner')
 
     print("Total entries: %s " % df.shape[0])
     df.to_csv(Path(output).resolve())
