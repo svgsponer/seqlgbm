@@ -1,7 +1,8 @@
 # SEQLGBM and SFSEQL
 Repository for SEQuence Learner Gradient Boosting Machine and Static Feature SEQuence Learner.
 This repository contains code for reproducing the experiments explained in the paper:
-Accurate Sequence Classification by Gradient Boosting with Linear Models by Severin Gsponer, Thach Le Nguyen, and Georgiana Ifrim.
+
+*Accurate Sequence Classification by Gradient Boosting with Linear Models by Severin Gsponer, Thach Le Nguyen, and Georgiana Ifrim*
 
 
 ## Install SEQLGBM
@@ -11,15 +12,15 @@ First clone the repository:
 
 The repository consists of three parts projected to the three folders
 - seql: `SEQLGBM` source code
-- Protsol: Data and scripts related to the Protein solubility experiments
-- UCR: Some data and scripts related to the Time Series Classification task.
+- Protsol: Data and scripts related to the protein solubility experiment
+- UCR: Some data and scripts related to the time series classification task
 
 
 ### Requirements
 SEQL has various requirements:
-- C++17 compiler 
-- CMake
-- Armadillo
+- C++17 compiler (e.g., >=gcc-7 or >=clang-7)
+- CMake (version >= 3.8)
+- Armadillo (
 - JSON for Modern C++
 - Catch2 (only if tests are build)
 Furtherdown we provide a rough guidline how to install these requirements.
