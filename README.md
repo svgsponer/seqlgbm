@@ -4,6 +4,32 @@ Repository for SEQuence Learner Gradient Boosting Machine and Static Feature SEQ
 Content will follow soon.
 
 ## Install
+First clone the repository:
+`git clone https://github.com/svgsponer/SEQL.git`
+
+### Requirements
+SEQL has various requirements:
+- C++17 compiler 
+- CMake
+- Armadillo
+- JSON for Modern C++
+- Catch2 (only if tests are build)
+Furtherdown we provide a rough guidline how to install these requirments.
+   
+To install SEQLGBM itself run these steps:
+```
+cd seql
+mkdir build
+cd build
+cmake .. 
+cmake -build .
+```
+This should produce the `seqlr` within the bin `build/bin` directory.
+For further configuration it's best to use `ccmake`, which provides a
+interface to tune the compilation options.
+
+
+
 
 ## Run
 
@@ -72,3 +98,75 @@ python run_all.py -d data -a SFSEQLGBM -pp
 
 <!-- #### Results -->
 <!-- To collect the results -->
+
+## Install requirements
+Here we outline the installation of Aramadillo and JSON library that SEQL relies on. This is more a guideline thatn a proper tutorial.
+Please adjust the procedure to your machine and needs.
+
+### Aramadillo
+Armadillo is a Linear algebra and scientific computing library for C++.
+We first install OpenBlas since Armadillo strongly sugest to have it installed.
+
+#### OpenBLAS
+First install openBLAS if not installed already.
+```
+mkdir OpenBLAS
+wget http://github.com/xianyi/OpenBLAS/archive/v0.2.20.tar.gz
+tar xvf v0.2.20.tar.gz
+cd OpenBLAS-0.2.20
+make
+make install
+```
+
+#### Armadillo
+Get Armadillo from http://arma.sourceforge.net/ and compile it.
+```
+mkdir armadillo
+cd armadillo
+wget http://sourceforge.net/projects/arma/files/armadillo-8.600.0.tar.xz
+tar xvf armadillo-8.600.0.tar.xz
+cd armadillo-8.600.0
+mkdir build
+cd build 
+cmake ..
+make
+make install
+```
+
+## JSON for Modern C++
+A json library for C++.
+Get the source from https://github.com/nlohmann/json.git, compile and install.
+```
+mkdir json
+cd json
+git clone https://github.com/nlohmann/json.git --depth=1
+cd json
+mkdir build
+cd build
+cmake ..
+make
+make install
+```
+
+## Catch2
+Catch2 is a testing library for C++.
+Hence Catch2 is only needed when you intend to run the unit tests.
+To enable test run ~cmake~ with  the option ~-DBUILD_TESTING=ON~.
+
+```
+mkdir catch2
+cd catch2
+git clone https://github.com/catchorg/Catch2.git --depth=1
+cd catch2
+mkdir build
+cd build
+cmake .
+make
+make install
+cd ../../../
+```
+
+To run the test run:
+```
+bin/test_seql
+```
