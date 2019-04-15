@@ -20,7 +20,7 @@ The repository consists of three parts projected to the three folders
 SEQL has various requirements:
 - C++17 compiler (e.g., >=gcc-7 or >=clang-7)
 - CMake (version >= 3.8)
-- Armadillo (
+- Armadillo
 - JSON for Modern C++
 - Catch2 (only if tests are build)
 Furtherdown we provide a rough guidline how to install these requirements.
@@ -88,7 +88,7 @@ Besides SEQLGBM the preprocessing of the UCR Archive has following requirements:
 
 - Matlab; to extract the static features
 - saxconvert from (https://github.com/lnthach/Mr-SEQL); for the SAXTransformation
-- R; to run glmnet
+- R; with glmnet package installed
 
 #### Run
 We provide a simple script to run a particular experiment on all timeseries problems in a particular folder. The script is available in `UCR/scripts/run_all.py`. It uses the following syntax:

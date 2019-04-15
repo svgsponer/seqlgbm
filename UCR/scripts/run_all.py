@@ -9,6 +9,7 @@ import json
 from scipy.stats import wilcoxon
 from tim import Tim
 import click
+
 SCRIPTPATH = Path(__file__).resolve().parent
 CWD = Path.cwd()
 MATLABDIR = Path.joinpath(SCRIPTPATH, "matlab/")
@@ -20,8 +21,8 @@ ts_cmd = "awk '/Time series/ {print $4}' %s"
 sax_cmd = "sax_convert -i %s -o %s -n %s -N %s -w 16 -a 4 -m 1 > saxconfig"
 cut_cmd = "cut -d\" \" -f1 --complement %s > %s"
 paste_cmd = "paste -d\" \" %s %s > %s"
-seql_cmd = "seqlr -t %s -s %s -c %s  > out"
-seql_gbm_cmd = "seqlr -t %s -s %s -c %s --GBM > out"
+seql_cmd = "seqlr -t %s -s %s -c %s --SAX  > out"
+seql_gbm_cmd = "seqlr -t %s -s %s -c %s --SAX --GBM > out"
 
 
 def tsv2csv(fp):
@@ -202,7 +203,7 @@ def SAXSEQLGBM(folders, pp, files):
     run_SAXSEQLGBM(folders)
 
 @Tim("Total SFSEQL", "time")
-def SFSEQL(folders, pp):
+def SFSEQL(folders, pp, files):
     if pp:
         extract_sf(files)
         create_sax(files)
