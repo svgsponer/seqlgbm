@@ -103,8 +103,14 @@ Example for SFSAXSEQLGBM:
 python run_all.py -d data -a SFSEQLGBM -pp
 ```
 
-<!-- #### Results -->
-<!-- To collect the results -->
+#### Results
+You can use the script `scripts/collect_results.py` to collect results across mutliple datasets and safe them in a csv file.
+Use the following syntax:
+```
+python collect_results -b <base_csv> -o <output_file> --item <path> <name> [--item <path> <name>]
+```
+The collected results are joined with the data already present in base_csv, this can be used to add already collected results. The item path will be searched for result files and each one added.
+The final output is a csv with the error for each algorithm and dataset.
 
 ## Install requirements
 Here we outline the installation of Aramadillo and JSON library that SEQL relies on. This is more a guideline thatn a proper tutorial.
