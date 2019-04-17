@@ -1,12 +1,26 @@
 # SEQLGBM and SFSEQL
-Repository for SEQuence Learner Gradient Boosting Machine and Static Feature SEQuence Learner.
-This repository contains code for reproducing the experiments explained in the paper:
+This repository contains code for **SEQ**uence **L**earner **G**radient **B**oosting **M**achine and **S**tatic **F**eature **SEQ**uence **L**earner as well as for reproducing the experiments explained in the paper:
 
 *Accurate Sequence Classification by Gradient Boosting with Linear Models by Severin Gsponer, Thach Le Nguyen, and Georgiana Ifrim*
 
+Abstract:
+Sequence classification is the problem of mapping a given sequence of symbols to a target class, and has important applications in text mining, biological sequence classification (e.g., DNA, proteins) and more recently in time series classification.
+State-of-the-art sequence classification algorithms rely on modeling the sequences based on the presence of certain patterns called *k*-mers.
+Despite the success of such techniques a major drawback of most such methods is that they have to limit their representation to a rather small *k* since the number of possible *k*-mers grows exponentially with *k*.
+Furthermore, such string features are rarely combined with available domain-specific numeric features which are often indispensable to achieve good performance.
+The contributions of this paper are twofold.
+First, we present a generalization of an existing linear sequence learning algorithm *SEQL* which is able to efficiently operate in the space of all possible *k*-mers.
+We generalize the ideas of *SEQL* by formulating a new gradient boosting algorithm called *SEQLGBM*, that relies on iterative selection of linear models.
+This generalization allows us to learn linear models in the space of all possible *k*-mers for arbitrary differentiable objective functions.
+Second, we extend *SEQL* by adapting the underlying learning procedure to combine numeric and string features.
+The composable nature of our proposed gradient boosting algorithm allows us to make immediate use of this extension.
+We present experiments on a protein solubility prediction task, as well as on the largest available benchmark for time series classification.
+Our comparison to the state-of-the-art shows that our proposed algorithm delivers more accurate results, while having the advantage that the two feature spaces (numeric and all sub-strings) are combined in a principled fashion within a single learning algorithm.
+
+
 
 ## Install SEQLGBM
-First clone the repository:
+Clone the repository by running:
 `git clone https://github.com/svgsponer/SEQL.git`
 
 The repository consists of three main folders:
@@ -15,13 +29,14 @@ The repository consists of three main folders:
 - UCR: Some data and scripts related to the time series classification task
 
 
-### Requirements
-SEQLGBM has various requirements:
+### Installation Requirements
+Before you compile SEQLGBM make sure you have all requirments installed:
 - C++17 compiler (e.g., >=gcc-7 or >=clang-7)
 - CMake (version >= 3.8)
 - Armadillo
 - JSON for Modern C++
 - Catch2 (only if tests are build)
+
 Furtherdown we provide a rough guidline how to install these requirements.
    
 To install SEQLGBM itself run these steps:
@@ -33,7 +48,7 @@ cmake ..
 cmake -build .
 ```
 This should produce the `seqlr` within the bin `build/bin` directory.
-You can either call it with the full path or add it to your `$PATH` envioment variable.
+You can either call it with the full path or add the `bin` directory to your `$PATH` envioment variable.
 For further configuration it's best to use `ccmake`, which provides a
 interface to tune the compilation options.
 
