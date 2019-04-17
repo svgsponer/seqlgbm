@@ -48,7 +48,7 @@ cmake ..
 cmake -build .
 ```
 This should produce the `seqlr` within the bin `build/bin` directory.
-You can either call it with the full path or add the `bin` directory to your `$PATH` envioment variable.
+You can either call it with the full path or add the `bin` directory to your `$PATH` environment variable.
 For further configuration it's best to use `ccmake`, which provides a
 interface to tune the compilation options.
 
@@ -61,6 +61,13 @@ To run SEQLGBM use the following syntax
 seqlr -t <trainfile> -s <testfile> -c <configfile> [--Validate -v <validationfile>] [-n <Name>] [--GBM] 
 ```
 if you don't use the validation file use `/dev/null`
+
+See `Protsol/data/train.SF.seql` for an example of the input files including static features.
+The first line of the file is a header, each additional line is a single data point. 
+The first column is the correct label followed by values for each static features, the line ends with the actual sequence.
+```
+#NAME <header version> <Number of static features> <Flag use char token>
+
 
 
 ### Protein solubility experiment
@@ -113,7 +120,7 @@ python run_all.py -d <DATADIR> -a <SAXSEQL|SFSEQL|SEQLGBM|SFSEQLGBM|GLMNET> [-pp
 The `-pp` flag is used to enable preprocessing without it preproecessed files are expected to be found in the same directory.
 The script will recursively search for `.tsv` files within the `DATADIR` and apply necessary preprocessing steps followed by running the indicated algorithm on the files.
 
-Example for SFSAXSEQLGBM:
+Example command to fun SFSAXSEQLGBM for all subfolders in `data` directory including the preprocessing steps:
 ```
 python run_all.py -d data -a SFSEQLGBM -pp
 ```
