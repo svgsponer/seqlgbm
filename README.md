@@ -66,7 +66,7 @@ See `Protsol/data/train.SF.seql` for an example of the input files including sta
 The first line of the file is a header, each additional line is a single data point. 
 The first column is the correct label followed by values for each static features, the line ends with the actual sequence.
 ```
-#NAME <header version> <Number of static features> <Flag use char token>
+#NAME <Header version = 1> <Number of static features> <Flag use char token>
 ```
 
 
