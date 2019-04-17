@@ -67,7 +67,7 @@ The first line of the file is a header, each additional line is a single data po
 The first column is the correct label followed by values for each static features, the line ends with the actual sequence.
 ```
 #NAME <header version> <Number of static features> <Flag use char token>
-
+```
 
 
 ### Protein solubility experiment
